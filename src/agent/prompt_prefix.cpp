@@ -23,6 +23,7 @@ PromptPrefix build_prompt_prefix(const WorkspaceContext& workspace, const ToolRe
         "    return -1\n</content></tool>\n"
         "<tool name=\"patch_file\" path=\"binary_search.py\"><old_text>return -1</old_text><new_text>return mid</new_text></tool>\n"
         "<tool>{\"name\":\"run_shell\",\"args\":{\"command\":\"uv run --with pytest python -m pytest -q\",\"timeout\":20}}</tool>\n"
+        "<tool>{\"name\":\"delegate\",\"args\":{\"tasks\":[{\"id\":\"api\",\"task\":\"inspect the API\"},{\"id\":\"tests\",\"task\":\"inspect tests\"}],\"max_steps\":3}}</tool>\n"
         "<final>Done.</final>";
     const std::string text =
         "You are runi, a small local coding agent working inside a local repository.\n\n"

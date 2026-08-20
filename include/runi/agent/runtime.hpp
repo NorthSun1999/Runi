@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include <functional>
 #include <map>
 #include <memory>
 #include <optional>
@@ -30,6 +31,8 @@ struct RuntimeOptions {
     std::string approval_policy{"ask"};
     std::size_t max_steps{6};
     std::size_t max_new_tokens{512};
+    std::size_t delegate_workers{4};
+    std::size_t max_delegate_tasks{8};
     std::size_t depth{0};
     std::size_t max_depth{1};
     bool read_only{false};
@@ -38,6 +41,7 @@ struct RuntimeOptions {
     std::map<std::string, bool, std::less<>> feature_flags{
         {"context_reduction", true}, {"memory", true}, {"prompt_cache", true}, {"relevant_memory", true}};
     std::optional<std::vector<std::string>> allowed_tools;
+    std::function<Result<std::shared_ptr<IModelClient>>()> child_model_factory;
 };
 
 class Runi final : public IToolHost, public IContextHost, public ICheckpointHost {
@@ -52,8 +56,10 @@ public:
 
     [[nodiscard]] Result<std::string> ask(std::string_view user_message, std::stop_token stop_token = {});
     [[nodiscard]] ModelAction parse(std::string_view raw) const;
-    [[nodiscard]] ToolExecutionResult execute_tool(std::string_view name, const JsonValue::Object& args);
-    [[nodiscard]] std::string run_tool(std::string_view name, const JsonValue::Object& args);
+    [[nodiscard]] ToolExecutionResult execute_tool(
+        std::string_view name, const JsonValue::Object& args, std::stop_token stop_token = {});
+    [[nodiscard]] std::string run_tool(
+        std::string_view name, const JsonValue::Object& args, std::stop_token stop_token = {});
     [[nodiscard]] Result<void> reset();
 
     [[nodiscard]] Result<ContextBuildResult> build_prompt(std::string_view user_message);
@@ -72,7 +78,8 @@ public:
     [[nodiscard]] std::string reject_durable_reason(std::string_view note_text) const;
     [[nodiscard]] std::string history_text() const;
     [[nodiscard]] JsonValue refresh_prefix(bool force = false);
-    [[nodiscard]] Result<std::string> spawn_delegate(const JsonValue::Object& args);
+    [[nodiscard]] Result<std::string> spawn_delegate(
+        const JsonValue::Object& args, std::stop_token stop_token = {});
 
     [[nodiscard]] std::string new_task_id() const;
     [[nodiscard]] std::string new_run_id() const;

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <regex>
+#include <set>
 #include <sstream>
 
 #include "runi/core/json_codec.hpp"
@@ -67,7 +68,7 @@ ToolDefinition make_list_files(const ToolContext& context) {
             ErrorCategory::Validation, "not_directory", "path is not a directory"));
         return Result<void>::success();
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token) -> Result<std::string> {
         const auto raw = string_arg(args, "path", false, ".");
         if (!raw) return Result<std::string>::failure(raw.error());
         const auto path = context.path(raw.value());
@@ -106,7 +107,7 @@ ToolDefinition make_read_file(const ToolContext& context) {
             ErrorCategory::Validation, "invalid_line_range", "invalid line range"));
         return Result<void>::success();
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token) -> Result<std::string> {
         const auto path = context.path(string_arg(args, "path", true).value());
         if (!path) return Result<std::string>::failure(path.error());
         const auto content = read_text_file(path.value(), true);
@@ -134,7 +135,7 @@ ToolDefinition make_search(const ToolContext& context) {
         const auto path = context.path(string_arg(args, "path", false, ".").value());
         return path ? Result<void>::success() : Result<void>::failure(path.error());
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token) -> Result<std::string> {
         const auto pattern = trim(string_arg(args, "pattern", true).value());
         const auto path = context.path(string_arg(args, "path", false, ".").value());
         if (!path) return Result<std::string>::failure(path.error());
@@ -188,7 +189,7 @@ ToolDefinition make_run_shell(const ToolContext& context) {
             ErrorCategory::Validation, "invalid_timeout", "timeout must be in [1, 120]"));
         return Result<void>::success();
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token) -> Result<std::string> {
         ProcessRunner runner;
         const auto result = runner.run(ProcessRequest{trim(string_arg(args, "command", true).value()), context.root,
             context.shell_env(), std::chrono::seconds(int_arg(args, "timeout", 20).value()), false});
@@ -212,7 +213,7 @@ ToolDefinition make_write_file(const ToolContext& context) {
         if (!args.contains("content")) return Result<void>::failure(make_error(ErrorCategory::Validation, "missing_content", "missing content"));
         return Result<void>::success();
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token) -> Result<std::string> {
         const auto path = context.path(string_arg(args, "path", true).value()); if (!path) return Result<std::string>::failure(path.error());
         const auto content = string_arg(args, "content", true); if (!content) return Result<std::string>::failure(content.error());
         const auto written = write_text_file(path.value(), content.value()); if (!written) return Result<std::string>::failure(written.error());
@@ -238,7 +239,7 @@ ToolDefinition make_patch_file(const ToolContext& context) {
             "old_text must occur exactly once, found " + std::to_string(count)));
         return Result<void>::success();
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token) -> Result<std::string> {
         const auto path = context.path(string_arg(args, "path", true).value()); if (!path) return Result<std::string>::failure(path.error());
         auto content = read_text_file(path.value()); if (!content) return Result<std::string>::failure(content.error());
         const auto old_text = string_arg(args, "old_text", true).value();
@@ -251,21 +252,93 @@ ToolDefinition make_patch_file(const ToolContext& context) {
 
 ToolDefinition make_delegate(const ToolContext& context) {
     ToolDefinition tool;
-    tool.descriptor = {"delegate", {{"task", "str"}, {"max_steps", "int=3"}}, false, "Ask a bounded read-only child agent to investigate."};
+    tool.descriptor = {"delegate",
+        {{"task", "str?"}, {"tasks", "array<str|{id?,task,max_steps?}>?"},
+            {"max_steps", "int=3"}, {"fail_fast", "bool=false"}},
+        false, "Run one child Agent or fan out several read-only child Agents in parallel."};
     tool.validate = [context](const JsonValue::Object& args) -> Result<void> {
-        const auto task = string_arg(args, "task", false);
-        if (!task || trim(task.value()).empty()) return Result<void>::failure(make_error(ErrorCategory::Validation, "empty_task", "task must not be empty"));
         if (context.depth >= context.max_depth) return Result<void>::failure(make_error(ErrorCategory::Validation, "delegate_depth", "delegate depth exceeded"));
-        return Result<void>::success();
+        const auto request = parse_delegate_request(args, context.max_delegate_tasks);
+        return request ? Result<void>::success() : Result<void>::failure(request.error());
     };
-    tool.run = [context](const JsonValue::Object& args) -> Result<std::string> {
+    tool.run = [context](const JsonValue::Object& args, std::stop_token stop_token) -> Result<std::string> {
         if (context.depth >= context.max_depth) return Result<std::string>::failure(make_error(ErrorCategory::Validation, "delegate_depth", "delegate depth exceeded"));
-        return context.spawn_delegate(args);
+        return context.spawn_delegate(args, stop_token);
     };
     return tool;
 }
 
 }  // namespace
+
+Result<DelegateRequest> parse_delegate_request(
+    const JsonValue::Object& args, std::size_t max_tasks) {
+    const bool has_task = args.contains("task");
+    const bool has_tasks = args.contains("tasks");
+    if (has_task == has_tasks) return Result<DelegateRequest>::failure(make_error(
+        ErrorCategory::Validation, "invalid_delegate_shape", "provide exactly one of task or tasks"));
+    const auto max_steps = int_arg(args, "max_steps", 3);
+    if (!max_steps) return Result<DelegateRequest>::failure(max_steps.error());
+    if (max_steps.value() < 1) return Result<DelegateRequest>::failure(make_error(
+        ErrorCategory::Validation, "invalid_delegate_steps", "max_steps must be positive"));
+    if (const auto found = args.find("fail_fast"); found != args.end() && !found->second.is_bool()) {
+        return Result<DelegateRequest>::failure(make_error(
+            ErrorCategory::Validation, "invalid_argument_type", "fail_fast must be a boolean"));
+    }
+
+    DelegateRequest request;
+    request.fail_fast = args.contains("fail_fast") && args.at("fail_fast").bool_or();
+    request.legacy_single = has_task;
+    if (has_task) {
+        const auto task = string_arg(args, "task", true);
+        if (!task || trim(task.value()).empty()) return Result<DelegateRequest>::failure(make_error(
+            ErrorCategory::Validation, "empty_task", "task must not be empty"));
+        request.tasks.push_back(DelegateTaskSpec{
+            "child-1", trim(task.value()), static_cast<std::size_t>(max_steps.value())});
+        return Result<DelegateRequest>::success(std::move(request));
+    }
+
+    const auto& tasks = args.at("tasks");
+    if (!tasks.is_array()) return Result<DelegateRequest>::failure(make_error(
+        ErrorCategory::Validation, "invalid_argument_type", "tasks must be an array"));
+    if (tasks.as_array().empty()) return Result<DelegateRequest>::failure(make_error(
+        ErrorCategory::Validation, "empty_delegate_tasks", "tasks must contain at least one child task"));
+    if (tasks.as_array().size() > max_tasks) return Result<DelegateRequest>::failure(make_error(
+        ErrorCategory::Validation, "delegate_task_limit", "tasks exceeds the configured child-task limit"));
+
+    std::set<std::string, std::less<>> ids;
+    for (std::size_t index = 0; index < tasks.as_array().size(); ++index) {
+        const auto& item = tasks.as_array()[index];
+        DelegateTaskSpec spec{
+            "child-" + std::to_string(index + 1), {}, static_cast<std::size_t>(max_steps.value())};
+        if (item.is_string()) {
+            spec.task = trim(item.as_string());
+        } else if (item.is_object()) {
+            const auto* task = item.find("task");
+            if (task == nullptr || !task->is_string()) return Result<DelegateRequest>::failure(make_error(
+                ErrorCategory::Validation, "invalid_delegate_task", "each child task requires a string task field"));
+            spec.task = trim(task->as_string());
+            if (const auto* id = item.find("id"); id != nullptr) {
+                if (!id->is_string() || trim(id->as_string()).empty()) return Result<DelegateRequest>::failure(make_error(
+                    ErrorCategory::Validation, "invalid_delegate_id", "child task id must be a non-empty string"));
+                spec.id = trim(id->as_string());
+            }
+            if (const auto* steps = item.find("max_steps"); steps != nullptr) {
+                if (!steps->is_integer() || steps->integer_or() < 1) return Result<DelegateRequest>::failure(make_error(
+                    ErrorCategory::Validation, "invalid_delegate_steps", "child max_steps must be a positive integer"));
+                spec.max_steps = static_cast<std::size_t>(steps->integer_or());
+            }
+        } else {
+            return Result<DelegateRequest>::failure(make_error(
+                ErrorCategory::Validation, "invalid_delegate_task", "each child task must be a string or object"));
+        }
+        if (spec.task.empty()) return Result<DelegateRequest>::failure(make_error(
+            ErrorCategory::Validation, "empty_task", "child task must not be empty"));
+        if (!ids.insert(spec.id).second) return Result<DelegateRequest>::failure(make_error(
+            ErrorCategory::Validation, "duplicate_delegate_id", "child task ids must be unique"));
+        request.tasks.push_back(std::move(spec));
+    }
+    return Result<DelegateRequest>::success(std::move(request));
+}
 
 Result<std::filesystem::path> ToolContext::path(std::string_view raw_path) const { return guard.resolve(raw_path); }
 std::map<std::string, std::string, std::less<>> ToolContext::shell_env() const { return shell_env_provider(); }
@@ -274,7 +347,7 @@ std::vector<std::string> legal_tool_names() { return {"list_files", "read_file",
 
 std::string tool_example(std::string_view name) {
     static const std::map<std::string, std::string, std::less<>> examples{
-        {"delegate", R"(<tool>{"name":"delegate","args":{"task":"inspect README.md","max_steps":3}}</tool>)"},
+        {"delegate", R"(<tool>{"name":"delegate","args":{"tasks":[{"id":"api","task":"inspect the API"},{"id":"tests","task":"inspect tests"}],"max_steps":3}}</tool>)"},
         {"list_files", R"(<tool>{"name":"list_files","args":{"path":"."}}</tool>)"},
         {"patch_file", R"(<tool name="patch_file" path="binary_search.py"><old_text>return -1</old_text><new_text>return mid</new_text></tool>)"},
         {"read_file", R"(<tool>{"name":"read_file","args":{"path":"README.md","start":1,"end":80}}</tool>)"},

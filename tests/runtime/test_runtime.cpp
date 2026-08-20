@@ -52,6 +52,31 @@ bool eventually(Predicate predicate, std::chrono::milliseconds timeout = 2s) {
     return predicate();
 }
 
+class DelayedFinalModelClient final : public IModelClient {
+public:
+    DelayedFinalModelClient(std::shared_ptr<std::atomic<int>> active, std::shared_ptr<std::atomic<int>> maximum)
+        : active_(std::move(active)), maximum_(std::move(maximum)) {}
+
+    Result<std::string> complete(std::string_view, std::size_t, const CompletionOptions&) override {
+        const auto current = active_->fetch_add(1) + 1;
+        auto observed = maximum_->load();
+        while (observed < current && !maximum_->compare_exchange_weak(observed, current)) {}
+        std::this_thread::sleep_for(40ms);
+        active_->fetch_sub(1);
+        return Result<std::string>::success("<final>service child evidence</final>");
+    }
+
+    bool supports_prompt_cache() const noexcept override { return false; }
+    const JsonValue& last_completion_metadata() const noexcept override { return metadata_; }
+    std::string model_name() const override { return "service-child"; }
+    std::string client_name() const override { return "DelayedFinalModelClient"; }
+
+private:
+    std::shared_ptr<std::atomic<int>> active_;
+    std::shared_ptr<std::atomic<int>> maximum_;
+    JsonValue metadata_{JsonValue::Object{}};
+};
+
 void test_bounded_executor() {
     BoundedExecutor executor(2, 4);
     std::atomic<int> active{0};
@@ -335,6 +360,41 @@ void test_agent_service_adapter(const std::filesystem::path& root) {
     const auto stopped = handler(RunInvocation{run, session.value()}, cancelled.get_token());
     check(!stopped && stopped.error().code == "run_cancelled" && models.load() == 1,
         "pre-cancelled service runs stop before constructing a model client");
+
+    const auto parallel_session = store->create_session("parallel-agent-session", root.string(), JsonValue::Object{});
+    check(parallel_session.has_value(), "parallel Agent service session is created");
+    if (!parallel_session) return;
+    auto service_models = std::make_shared<std::atomic<int>>(0);
+    auto active_children = std::make_shared<std::atomic<int>>(0);
+    auto maximum_children = std::make_shared<std::atomic<int>>(0);
+    ModelClientFactory parallel_factory = [service_models, active_children, maximum_children]()
+        -> Result<std::shared_ptr<IModelClient>> {
+        const auto index = service_models->fetch_add(1);
+        std::shared_ptr<IModelClient> model;
+        if (index == 0) {
+            model = std::make_shared<FakeModelClient>(std::vector<std::string>{
+                R"(<tool>{"name":"delegate","args":{"tasks":[{"id":"one","task":"inspect one"},{"id":"two","task":"inspect two"},{"id":"three","task":"inspect three"}],"max_steps":1}}</tool>)",
+                "<final>service parent merged evidence</final>"});
+        } else {
+            model = std::make_shared<DelayedFinalModelClient>(active_children, maximum_children);
+        }
+        return Result<std::shared_ptr<IModelClient>>::success(std::move(model));
+    };
+    RuniAgentServiceHandler parallel_handler(store, root / ".runi", parallel_factory, runtime_options);
+    RuntimeRunRecord parallel_run;
+    parallel_run.id = "parallel-agent-run";
+    parallel_run.session_id = "parallel-agent-session";
+    parallel_run.request = "fan out and merge through the service adapter";
+    const auto parallel_answer = parallel_handler(
+        RunInvocation{parallel_run, parallel_session.value()}, {});
+    check(parallel_answer && parallel_answer.value() == "service parent merged evidence" &&
+        service_models->load() == 4 && maximum_children->load() >= 2,
+        "service handler supplies independent models to concurrent child Agents");
+    const auto parallel_persisted = sessions.load("parallel-agent-session");
+    check(parallel_persisted && parallel_persisted.value().history.size() == 3 &&
+        parallel_persisted.value().history[1].name == "delegate" &&
+        parallel_persisted.value().history[1].content.find("delegate_results:") != std::string::npos,
+        "service parent persists the aggregated parallel delegate result before its final answer");
 }
 
 ServiceRequest json_request(std::string method, std::string target, JsonValue body = JsonValue::Object{}) {

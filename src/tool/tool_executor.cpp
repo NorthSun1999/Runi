@@ -42,7 +42,10 @@ JsonValue ToolExecutor::metadata(
     return JsonValue(std::move(result));
 }
 
-ToolExecutionResult ToolExecutor::execute(const ToolCall& call) {
+ToolExecutionResult ToolExecutor::execute(const ToolCall& call, std::stop_token stop_token) {
+    if (stop_token.stop_requested()) return {
+        "error: tool execution cancelled",
+        metadata("cancelled", "run_cancelled", "", "low", true)};
     if (const auto& allowed = host_.allowed_tools(); allowed.has_value() &&
         std::find(allowed->begin(), allowed->end(), call.name) == allowed->end()) {
         return {"error: tool '" + call.name + "' is not allowed in this run",
@@ -68,7 +71,7 @@ ToolExecutionResult ToolExecutor::execute(const ToolCall& call) {
         metadata("rejected", "approval_denied", host_.read_only() ? "read_only_block" : "approval_denied", "high", false)};
 
     const auto before = tool->descriptor.risky ? host_.capture_workspace_snapshot() : WorkspaceSnapshot{};
-    const auto execution = tool->run(call.args);
+    const auto execution = tool->run(call.args, stop_token);
     const auto after = tool->descriptor.risky ? host_.capture_workspace_snapshot() : before;
     const auto [affected_paths, diff_summary] = host_.diff_workspace_snapshots(before, after);
     const bool workspace_changed = !affected_paths.empty();

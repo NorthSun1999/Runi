@@ -27,6 +27,7 @@ std::string field(const JsonValue& value, std::string_view name) {
 
 const std::vector<std::string> kIdentityKeys{
     "cwd", "model", "model_client", "approval_policy", "read_only", "max_steps", "max_new_tokens",
+    "delegate_workers", "max_delegate_tasks", "max_depth",
     "feature_flags", "shell_env_allowlist", "workspace_fingerprint", "tool_signature"};
 
 }  // namespace

@@ -2,6 +2,7 @@
 
 #include <map>
 #include <optional>
+#include <stop_token>
 #include <string>
 #include <utility>
 #include <vector>
@@ -37,13 +38,15 @@ public:
 class IToolExecutor {
 public:
     virtual ~IToolExecutor() = default;
-    [[nodiscard]] virtual ToolExecutionResult execute(const ToolCall& call) = 0;
+    [[nodiscard]] virtual ToolExecutionResult execute(
+        const ToolCall& call, std::stop_token stop_token = {}) = 0;
 };
 
 class ToolExecutor final : public IToolExecutor {
 public:
     ToolExecutor(const ToolRegistry& tools, IToolHost& host);
-    [[nodiscard]] ToolExecutionResult execute(const ToolCall& call) override;
+    [[nodiscard]] ToolExecutionResult execute(
+        const ToolCall& call, std::stop_token stop_token = {}) override;
 
 private:
     [[nodiscard]] static JsonValue metadata(

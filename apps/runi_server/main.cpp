@@ -33,6 +33,8 @@ struct Args {
     std::size_t workers{4};
     std::size_t queue_capacity{32};
     std::size_t max_steps{6};
+    std::size_t delegate_workers{4};
+    std::size_t max_delegate_tasks{8};
     std::string approval{"never"};
 };
 
@@ -47,6 +49,8 @@ void print_help() {
         "  --workers N          Concurrent Agent run workers (default: 4)\n"
         "  --queue-capacity N   Waiting Agent run capacity (default: 32)\n"
         "  --max-steps N        Maximum AgentLoop steps per run (default: 6)\n"
+        "  --delegate-workers N Concurrent child Agent workers per run (default: 4)\n"
+        "  --max-delegate-tasks N Maximum child tasks per delegate call (default: 8)\n"
         "  --approval MODE      auto or never for service tools (default: never)\n"
         "  -h, --help           Show this help message\n";
 }
@@ -72,11 +76,14 @@ Args parse_args(int argc, char* argv[]) {
         } else if (option == "--workers") args.workers = std::stoull(value());
         else if (option == "--queue-capacity") args.queue_capacity = std::stoull(value());
         else if (option == "--max-steps") args.max_steps = std::stoull(value());
+        else if (option == "--delegate-workers") args.delegate_workers = std::stoull(value());
+        else if (option == "--max-delegate-tasks") args.max_delegate_tasks = std::stoull(value());
         else if (option == "--approval") args.approval = value();
         else throw std::invalid_argument("unknown option: " + option);
     }
-    if (args.workers == 0 || args.queue_capacity == 0 || args.max_steps == 0) {
-        throw std::invalid_argument("workers, queue-capacity, and max-steps must be positive");
+    if (args.workers == 0 || args.queue_capacity == 0 || args.max_steps == 0 ||
+        args.delegate_workers == 0 || args.max_delegate_tasks == 0) {
+        throw std::invalid_argument("worker, queue, step, and delegate limits must be positive");
     }
     if (args.approval != "auto" && args.approval != "never") {
         throw std::invalid_argument("service approval must be auto or never");
@@ -140,6 +147,8 @@ int main(int argc, char* argv[]) {
         RuntimeOptions runtime_options;
         runtime_options.approval_policy = args.approval;
         runtime_options.max_steps = args.max_steps;
+        runtime_options.delegate_workers = args.delegate_workers;
+        runtime_options.max_delegate_tasks = args.max_delegate_tasks;
         auto agent_handler = std::make_shared<RuniAgentServiceHandler>(
             state_store, root / ".runi", model_factory_from_environment(), runtime_options);
         BoundedExecutor run_executor(args.workers, args.queue_capacity);

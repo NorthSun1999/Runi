@@ -1,6 +1,7 @@
 #include "runi/agent/runtime.hpp"
 
 #include <algorithm>
+#include <chrono>
 #include <cctype>
 #include <iostream>
 #include <regex>
@@ -11,6 +12,7 @@
 #include "runi/core/sha256.hpp"
 #include "runi/core/text.hpp"
 #include "runi/core/time.hpp"
+#include "runi/orchestration/multi_agent.hpp"
 
 namespace runi {
 namespace {
@@ -38,6 +40,10 @@ bool ignored_relative(const std::filesystem::path& relative) {
     return false;
 }
 
+Error cancelled_delegate_error() {
+    return make_error(ErrorCategory::Timeout, "run_cancelled", "Parent run cancelled before child Agents completed");
+}
+
 }  // namespace
 
 Runi::Runi(
@@ -51,6 +57,9 @@ Runi::Runi(
       guard_(root_), session_store_(std::move(session_store)), run_store_(std::move(run_store)),
       session_(session.has_value() ? std::move(*session) : SessionState::create(root_.string())), options_(std::move(options)),
       memory_(session_.memory, root_), context_manager_(*this) {
+    if (options_.delegate_workers == 0 || options_.max_delegate_tasks == 0) {
+        throw std::invalid_argument("delegate worker and task limits must be positive");
+    }
     session_.ensure_shape();
     memory_ = LayeredMemory(session_.memory, root_);
     std::set<std::string, std::less<>> normalized_secret_names;
@@ -70,7 +79,10 @@ Runi::Runi(
 ToolContext Runi::tool_context() {
     return ToolContext{
         root_, guard_, [this] { return shell_environment(options_.shell_env_allowlist, root_); },
-        options_.depth, options_.max_depth, [this](const JsonValue::Object& args) { return spawn_delegate(args); }};
+        options_.depth, options_.max_depth, options_.max_delegate_tasks,
+        [this](const JsonValue::Object& args, std::stop_token stop_token) {
+            return spawn_delegate(args, stop_token);
+        }};
 }
 
 ToolRegistry Runi::apply_tool_allowlist(ToolRegistry tools) const {
@@ -93,13 +105,17 @@ Result<std::string> Runi::ask(std::string_view user_message, std::stop_token sto
 }
 ModelAction Runi::parse(std::string_view raw) const { return parser_.parse(raw); }
 
-ToolExecutionResult Runi::execute_tool(std::string_view name, const JsonValue::Object& args) {
-    auto result = tool_executor_->execute(ToolCall{std::string(name), args});
+ToolExecutionResult Runi::execute_tool(
+    std::string_view name, const JsonValue::Object& args, std::stop_token stop_token) {
+    auto result = tool_executor_->execute(ToolCall{std::string(name), args}, stop_token);
     last_tool_result_metadata_ = result.metadata;
     return result;
 }
 
-std::string Runi::run_tool(std::string_view name, const JsonValue::Object& args) { return execute_tool(name, args).content; }
+std::string Runi::run_tool(
+    std::string_view name, const JsonValue::Object& args, std::stop_token stop_token) {
+    return execute_tool(name, args, stop_token).content;
+}
 
 Result<void> Runi::reset() {
     session_.history.clear();
@@ -325,19 +341,94 @@ std::tuple<std::vector<std::string>, std::vector<std::string>, std::vector<std::
     return {promoted, rejections, superseded};
 }
 
-Result<std::string> Runi::spawn_delegate(const JsonValue::Object& args) {
-    const auto task = args.contains("task") ? trim(args.at("task").string_or()) : std::string{};
-    RuntimeOptions child_options = options_;
-    child_options.approval_policy = "never";
-    child_options.max_steps = args.contains("max_steps") ? static_cast<std::size_t>(std::max<std::int64_t>(1, args.at("max_steps").integer_or(3))) : 3;
-    child_options.depth = options_.depth + 1;
-    child_options.read_only = true;
-    Runi child(model_client_, workspace_, session_store_, run_store_, std::nullopt, child_options);
-    child.memory_.set_task_summary(task).append_note(clip(history_text(), 300));
-    child.sync_memory();
-    const auto answer = child.ask(task);
-    if (!answer) return answer;
-    return Result<std::string>::success("delegate_result:\n" + answer.value());
+Result<std::string> Runi::spawn_delegate(
+    const JsonValue::Object& args, std::stop_token stop_token) {
+    if (stop_token.stop_requested()) return Result<std::string>::failure(cancelled_delegate_error());
+    auto request = parse_delegate_request(args, options_.max_delegate_tasks);
+    if (!request) return Result<std::string>::failure(request.error());
+
+    auto child_factory = options_.child_model_factory;
+    if (!child_factory) {
+        if (request.value().tasks.size() != 1) return Result<std::string>::failure(make_error(
+            ErrorCategory::Configuration, "child_model_factory_missing",
+            "parallel delegate requires a child ModelClient factory"));
+        const auto shared_model = model_client_;
+        child_factory = [shared_model]() {
+            return Result<std::shared_ptr<IModelClient>>::success(shared_model);
+        };
+    }
+
+    const auto worker_count = std::min(options_.delegate_workers, request.value().tasks.size());
+    BoundedExecutor executor(worker_count, request.value().tasks.size());
+    AgentRegistry registry;
+    AgentDescriptor descriptor;
+    descriptor.id = "runi-child-worker";
+    descriptor.role = AgentRole::Worker;
+    descriptor.capabilities = {"delegate"};
+    descriptor.max_concurrency = worker_count;
+    descriptor.read_only = true;
+    const auto base_options = options_;
+    const auto workspace = workspace_;
+    const auto sessions = session_store_;
+    const auto runs = run_store_;
+    const auto parent_history = clip(history_text(), 300);
+    descriptor.execute = [base_options, child_factory, workspace, sessions, runs, parent_history](
+        const AgentTask& task, std::stop_token child_stop) -> Result<std::string> {
+        if (child_stop.stop_requested()) return Result<std::string>::failure(cancelled_delegate_error());
+        auto child_model = child_factory();
+        if (!child_model) return Result<std::string>::failure(child_model.error());
+        RuntimeOptions child_options = base_options;
+        child_options.approval_policy = "never";
+        child_options.max_steps = static_cast<std::size_t>(task.context_snapshot.at("max_steps").integer_or(3));
+        child_options.depth = base_options.depth + 1;
+        child_options.read_only = true;
+        child_options.child_model_factory = {};
+        Runi child(child_model.value(), workspace, sessions, runs, std::nullopt, std::move(child_options));
+        child.memory_.set_task_summary(task.input).append_note(parent_history);
+        child.sync_memory();
+        return child.ask(task.input, child_stop);
+    };
+    const auto added = registry.add(std::move(descriptor));
+    if (!added) return Result<std::string>::failure(added.error());
+
+    std::vector<AgentTask> tasks;
+    tasks.reserve(request.value().tasks.size());
+    const auto deadline = std::chrono::steady_clock::now() + std::chrono::minutes(10);
+    for (const auto& spec : request.value().tasks) {
+        tasks.push_back(AgentTask{spec.id, AgentRole::Worker, {"delegate"}, spec.task,
+            JsonValue::Object{{"max_steps", JsonValue(static_cast<std::int64_t>(spec.max_steps))}}, deadline});
+    }
+    MultiAgentRuntime runtime(registry, executor);
+    MultiAgentOptions multi_options;
+    multi_options.fail_fast = request.value().fail_fast;
+    auto outcomes = runtime.run_parallel(tasks, multi_options, stop_token);
+    if (!outcomes) return Result<std::string>::failure(outcomes.error());
+    if (stop_token.stop_requested()) return Result<std::string>::failure(cancelled_delegate_error());
+
+    if (request.value().legacy_single) {
+        const auto& outcome = outcomes.value().front();
+        if (!outcome.success) return Result<std::string>::failure(outcome.error);
+        return Result<std::string>::success("delegate_result:\n" + outcome.output);
+    }
+
+    JsonValue::Array aggregated;
+    aggregated.reserve(outcomes.value().size());
+    for (const auto& outcome : outcomes.value()) {
+        JsonValue::Object item{{"id", JsonValue(outcome.task_id)}};
+        if (outcome.success) {
+            item.emplace("output", JsonValue(outcome.output));
+            item.emplace("status", JsonValue("succeeded"));
+        } else {
+            item.emplace("error", JsonValue::Object{
+                {"code", JsonValue(outcome.error.code)},
+                {"message", JsonValue(outcome.error.message)},
+                {"retryable", JsonValue(outcome.error.retryable)}});
+            item.emplace("status", JsonValue("failed"));
+        }
+        aggregated.emplace_back(std::move(item));
+    }
+    return Result<std::string>::success(
+        "delegate_results:\n" + dump_json(JsonValue(std::move(aggregated))));
 }
 
 JsonValue Runi::build_report(const TaskState& task_state) const {
@@ -422,7 +513,9 @@ JsonValue Runi::runtime_identity() const {
     for (const auto& [key, value] : options_.feature_flags) flags[key] = JsonValue(value);
     return JsonValue::Object{
         {"approval_policy", JsonValue(options_.approval_policy)}, {"cwd", JsonValue(root_.string())},
-        {"feature_flags", JsonValue(std::move(flags))}, {"max_new_tokens", JsonValue(options_.max_new_tokens)},
+        {"delegate_workers", JsonValue(options_.delegate_workers)},
+        {"feature_flags", JsonValue(std::move(flags))}, {"max_delegate_tasks", JsonValue(options_.max_delegate_tasks)},
+        {"max_depth", JsonValue(options_.max_depth)}, {"max_new_tokens", JsonValue(options_.max_new_tokens)},
         {"max_steps", JsonValue(options_.max_steps)}, {"model", JsonValue(model_client_->model_name())},
         {"model_client", JsonValue(model_client_->client_name())}, {"read_only", JsonValue(options_.read_only)},
         {"session_id", JsonValue(session_.id)}, {"shell_env_allowlist", strings_json(options_.shell_env_allowlist)},

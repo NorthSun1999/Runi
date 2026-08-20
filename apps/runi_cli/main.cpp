@@ -39,7 +39,7 @@ struct Args {
     int ollama_timeout{300}, openai_timeout{300};
     std::string approval{"ask"};
     std::vector<std::string> secret_env_names;
-    std::size_t max_steps{6}, max_new_tokens{512};
+    std::size_t max_steps{6}, max_new_tokens{512}, delegate_workers{4}, max_delegate_tasks{8};
     double temperature{0.2}, top_p{0.9};
 };
 
@@ -64,6 +64,8 @@ void print_help() {
         "  --secret-env-name NAME     Extra secret environment variable; repeatable\n"
         "  --max-steps N              Maximum tool/model iterations (default: 6)\n"
         "  --max-new-tokens N         Maximum model output tokens (default: 512)\n"
+        "  --delegate-workers N       Concurrent child Agent workers (default: 4)\n"
+        "  --max-delegate-tasks N     Maximum child tasks per delegate call (default: 8)\n"
         "  --temperature VALUE        Sampling temperature (default: 0.2)\n"
         "  --top-p VALUE              Ollama top-p value (default: 0.9)\n"
         "  -h, --help                 Show this help message\n";
@@ -114,13 +116,18 @@ Args parse_args(int argc, char* argv[]) {
         else if (option == "--secret-env-name") args.secret_env_names.push_back(value());
         else if (option == "--max-steps") args.max_steps = std::stoull(value());
         else if (option == "--max-new-tokens") args.max_new_tokens = std::stoull(value());
+        else if (option == "--delegate-workers") args.delegate_workers = std::stoull(value());
+        else if (option == "--max-delegate-tasks") args.max_delegate_tasks = std::stoull(value());
         else if (option == "--temperature") args.temperature = std::stod(value());
         else if (option == "--top-p") args.top_p = std::stod(value());
         else if (option.starts_with('-')) usage_error("unrecognized argument: " + token);
         else args.prompt.push_back(token);
     }
     if (args.approval != "ask" && args.approval != "auto" && args.approval != "never") usage_error("unknown approval policy: " + args.approval);
-    if (args.max_steps == 0 || args.max_new_tokens == 0 || args.ollama_timeout <= 0 || args.openai_timeout <= 0) usage_error("numeric limits must be positive");
+    if (args.max_steps == 0 || args.max_new_tokens == 0 || args.delegate_workers == 0 ||
+        args.max_delegate_tasks == 0 || args.ollama_timeout <= 0 || args.openai_timeout <= 0) {
+        usage_error("numeric limits must be positive");
+    }
     return args;
 }
 
@@ -250,7 +257,13 @@ int main(int argc, char* argv[]) {
         options.approval_policy = args.approval;
         options.max_steps = args.max_steps;
         options.max_new_tokens = args.max_new_tokens;
+        options.delegate_workers = args.delegate_workers;
+        options.max_delegate_tasks = args.max_delegate_tasks;
         options.secret_env_names = configured_secret_names(args);
+        options.child_model_factory = [args, provider, model_name]() -> Result<std::shared_ptr<IModelClient>> {
+            return Result<std::shared_ptr<IModelClient>>::success(
+                build_model(args, provider, model_name));
+        };
         Runi agent(model, std::move(workspace), sessions, runs, std::move(session), std::move(options));
         std::cout << welcome(agent, model_name) << '\n';
 

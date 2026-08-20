@@ -127,7 +127,7 @@ Result<std::string> AgentLoop::run(std::string_view user_message, std::stop_toke
             const auto& call = std::get<ToolCall>(action);
             task_state.record_tool(call.name);
             const auto tool_started = Clock::now();
-            const auto tool_result = agent_.execute_tool(call.name, call.args);
+            const auto tool_result = agent_.execute_tool(call.name, call.args, stop_token);
             if (stop_token.stop_requested()) return finish_cancelled();
             HistoryItem item = message("tool", tool_result.content);
             item.name = call.name;

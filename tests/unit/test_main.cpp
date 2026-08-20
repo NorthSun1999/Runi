@@ -1,9 +1,12 @@
+#include <atomic>
+#include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <thread>
 #include <vector>
 
 #include "runi/agent/action_parser.hpp"
@@ -66,6 +69,51 @@ public:
         return name != "context_reduction" || context_reduction_enabled;
     }
     std::string reusable_file_summary(std::string_view) const override { return {}; }
+};
+
+class ParallelChildModelClient final : public IModelClient {
+public:
+    ParallelChildModelClient(
+        std::shared_ptr<std::atomic<int>> active,
+        std::shared_ptr<std::atomic<int>> maximum)
+        : active_(std::move(active)), maximum_(std::move(maximum)) {}
+
+    Result<std::string> complete(
+        std::string_view prompt,
+        std::size_t,
+        const CompletionOptions&) override {
+        const auto current = active_->fetch_add(1) + 1;
+        auto observed = maximum_->load();
+        while (observed < current && !maximum_->compare_exchange_weak(observed, current)) {}
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        active_->fetch_sub(1);
+
+        constexpr std::string_view marker = "Current user request:\n";
+        const auto marker_at = prompt.rfind(marker);
+        const auto task = marker_at == std::string_view::npos
+            ? std::string(prompt)
+            : std::string(prompt.substr(marker_at + marker.size()));
+        if (task.find("write attempt") != std::string::npos && completions_++ == 0) {
+            return Result<std::string>::success(
+                R"(<tool>{"name":"write_file","args":{"path":"forbidden.txt","content":"must not be written"}}</tool>)");
+        }
+        if (task.find("fail") != std::string::npos) {
+            return Result<std::string>::failure(make_error(
+                ErrorCategory::ModelProtocol, "child_model_failed", "scripted child failure"));
+        }
+        return Result<std::string>::success("<final>child:" + task + "</final>");
+    }
+
+    bool supports_prompt_cache() const noexcept override { return false; }
+    const JsonValue& last_completion_metadata() const noexcept override { return metadata_; }
+    std::string model_name() const override { return "parallel-child"; }
+    std::string client_name() const override { return "ParallelChildModelClient"; }
+
+private:
+    std::shared_ptr<std::atomic<int>> active_;
+    std::shared_ptr<std::atomic<int>> maximum_;
+    std::size_t completions_{0};
+    JsonValue metadata_{JsonValue::Object{}};
 };
 
 void test_json_contract() {
@@ -289,6 +337,76 @@ void test_step_limit(const std::filesystem::path& workspace_root) {
     check(agent.current_task_state != nullptr && agent.current_task_state->stop_reason == "step_limit_reached", "step limit stop reason persists");
 }
 
+void test_parallel_delegate(const std::filesystem::path& workspace_root) {
+    write_file(workspace_root / "README.md", "parallel delegate fixture\n");
+    const auto workspace = WorkspaceContext::build(workspace_root, workspace_root);
+    check(workspace.has_value(), "parallel-delegate workspace builds");
+    if (!workspace) return;
+
+    auto sessions = std::make_shared<SessionStore>(workspace_root / ".runi" / "sessions");
+    auto runs = std::make_shared<RunStore>(workspace_root / ".runi" / "runs");
+    auto parent = std::make_shared<FakeModelClient>(std::vector<std::string>{
+        R"(<tool>{"name":"delegate","args":{"tasks":[{"id":"first","task":"inspect alpha"},{"id":"second","task":"fail beta"},{"id":"third","task":"inspect gamma"},{"id":"writer","task":"write attempt","max_steps":2}],"max_steps":1,"fail_fast":false}}</tool>)",
+        "<final>parent merged the child evidence</final>"});
+    auto active = std::make_shared<std::atomic<int>>(0);
+    auto maximum = std::make_shared<std::atomic<int>>(0);
+    auto created = std::make_shared<std::atomic<int>>(0);
+
+    RuntimeOptions options;
+    options.approval_policy = "auto";
+    options.delegate_workers = 3;
+    options.max_delegate_tasks = 4;
+    options.child_model_factory = [active, maximum, created]() -> Result<std::shared_ptr<IModelClient>> {
+        created->fetch_add(1);
+        std::shared_ptr<IModelClient> child = std::make_shared<ParallelChildModelClient>(active, maximum);
+        return Result<std::shared_ptr<IModelClient>>::success(std::move(child));
+    };
+
+    Runi agent(parent, workspace.value(), sessions, runs, std::nullopt, options);
+    const auto answer = agent.ask("inspect three areas in parallel and merge the evidence");
+    check(answer && answer.value() == "parent merged the child evidence",
+        "parent Agent resumes after parallel children and returns its own merged answer");
+    check(created->load() == 4 && maximum->load() >= 2,
+        "parallel delegate creates an independent model client per child and overlaps execution");
+    check(parent->prompts.size() == 2, "parallel delegate returns one aggregated tool result to the parent loop");
+    if (parent->prompts.size() == 2) {
+        const auto& merged_prompt = parent->prompts[1];
+        const auto first = merged_prompt.find("\"id\":\"first\"");
+        const auto second = merged_prompt.find("\"id\":\"second\"");
+        const auto third = merged_prompt.find("\"id\":\"third\"");
+        const auto writer = merged_prompt.find("\"id\":\"writer\"");
+        check(merged_prompt.find("delegate_results:") != std::string::npos &&
+            first < second && second < third && third < writer,
+            "parallel delegate fans in child outcomes in the original task order");
+        check(merged_prompt.find("child:inspect alpha") != std::string::npos &&
+            merged_prompt.find("child_model_failed") != std::string::npos &&
+            merged_prompt.find("child:inspect gamma") != std::string::npos &&
+            merged_prompt.find("child:write attempt") != std::string::npos,
+            "collect-all aggregation preserves successful evidence and a local child failure");
+    }
+    check(!std::filesystem::exists(workspace_root / "forbidden.txt"),
+        "parallel child Agents remain read-only even when a child model requests a write tool");
+
+    std::size_t saved_sessions = 0;
+    for (const auto& entry : std::filesystem::directory_iterator(workspace_root / ".runi" / "sessions")) {
+        if (entry.is_regular_file() && entry.path().extension() == ".json") ++saved_sessions;
+    }
+    check(saved_sessions >= 5, "parent and parallel children persist isolated SessionState objects");
+
+    const auto empty = agent.run_tool("delegate", {{"tasks", JsonValue::Array{}}});
+    check(empty.find("tasks must contain at least one child task") != std::string::npos,
+        "parallel delegate rejects an empty child-task batch");
+
+    std::stop_source cancelled;
+    cancelled.request_stop();
+    const auto before_cancel = created->load();
+    const auto cancelled_result = agent.spawn_delegate(JsonValue::Object{
+        {"tasks", JsonValue::Array{JsonValue::Object{{"id", JsonValue("cancelled")}, {"task", JsonValue("inspect cancelled")}}}}},
+        cancelled.get_token());
+    check(!cancelled_result && cancelled_result.error().code == "run_cancelled" && created->load() == before_cancel,
+        "a cancelled parent does not start new child Agents");
+}
+
 }  // namespace
 
 int main() {
@@ -309,6 +427,7 @@ int main() {
     test_prompt_and_context_contract(target / "prompt-context");
     test_agent_and_tools(target / "agent");
     test_step_limit(target / "step-limit");
+    test_parallel_delegate(target / "parallel-delegate");
     std::filesystem::remove_all(target, error);
     if (failures != 0) {
         std::cerr << failures << " test(s) failed\n";

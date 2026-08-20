@@ -32,7 +32,9 @@ Result<std::string> RuniAgentServiceHandler::operator()(
     auto runs = std::make_shared<RunStore>(artifact_root_ / "runs");
     auto session = sessions->load(invocation.session.id);
     if (!session) return Result<std::string>::failure(session.error());
-    Runi agent(model.value(), workspace.value(), sessions, runs, session.value(), runtime_options_);
+    auto runtime_options = runtime_options_;
+    runtime_options.child_model_factory = model_factory_;
+    Runi agent(model.value(), workspace.value(), sessions, runs, session.value(), std::move(runtime_options));
     return agent.ask(invocation.run.request, stop_token);
 }
 
