@@ -6,14 +6,14 @@
 #include <string>
 #include <vector>
 
-#include "runi/action_parser.hpp"
-#include "runi/context_manager.hpp"
+#include "runi/agent/action_parser.hpp"
+#include "runi/context/context_manager.hpp"
 #include "runi/core/json_codec.hpp"
 #include "runi/core/text.hpp"
-#include "runi/evaluation.hpp"
-#include "runi/http_client.hpp"
-#include "runi/providers.hpp"
-#include "runi/runtime.hpp"
+#include "runi/evaluation/evaluation.hpp"
+#include "runi/model/http_client.hpp"
+#include "runi/model/providers.hpp"
+#include "runi/agent/runtime.hpp"
 
 namespace {
 
@@ -55,13 +55,16 @@ class ContextContractHost final : public IContextHost {
 public:
     std::string prefix_text{"stable prefix"};
     SessionState state;
+    bool context_reduction_enabled{false};
 
     const std::string& prefix() const override { return prefix_text; }
     std::string memory_text() override { return "Memory:\n- task_summary: active"; }
     std::string render_checkpoint_text() const override { return {}; }
     std::vector<JsonValue> memory_candidates(std::string_view, std::size_t) override { return {}; }
     const SessionState& session() const override { return state; }
-    bool feature_enabled(std::string_view name) const override { return name != "context_reduction"; }
+    bool feature_enabled(std::string_view name) const override {
+        return name != "context_reduction" || context_reduction_enabled;
+    }
     std::string reusable_file_summary(std::string_view) const override { return {}; }
 };
 
@@ -151,6 +154,30 @@ void test_prompt_and_context_contract(const std::filesystem::path& workspace_roo
               budgets.at("history").integer_or() ==
                 static_cast<std::int64_t>(utf8_length("Transcript:\n- empty")),
             "non-reduced context metadata reports the rendered raw section budgets");
+    }
+
+    for (int index = 0; index < 12; ++index) {
+        host.state.history.push_back(HistoryItem{
+            index % 2 == 0 ? "user" : "assistant", "history-" + std::to_string(index) + "-" + std::string(120, 'H'),
+            "2026-04-08T11:00:00+00:00", {}, JsonValue::Object{}});
+    }
+    ContextManager unbounded(host);
+    const auto raw_long_context = unbounded.build("retain this request");
+    host.context_reduction_enabled = true;
+    ContextManager constrained(host);
+    constrained.total_budget = 180;
+    constrained.section_budgets = {{"history", 200}, {"memory", 100}, {"prefix", 100}, {"relevant_memory", 100}};
+    const auto reduced = constrained.build("retain this request");
+    check(reduced && !reduced.value().metadata.at("budget_reductions").as_array().empty(),
+        "context reduction records budget changes for an overflowing prompt");
+    check(reduced && !reduced.value().metadata.at("prompt_over_budget").bool_or(true) &&
+        reduced.value().prompt.ends_with("Current user request:\nretain this request"),
+        "feasible context reduction reaches the total budget and preserves the current request");
+    check(raw_long_context && reduced && utf8_length(raw_long_context.value().prompt) > utf8_length(reduced.value().prompt),
+        "disabling context reduction keeps the raw history baseline for ablation");
+    if (reduced && !reduced.value().metadata.at("budget_reductions").as_array().empty()) {
+        check(reduced.value().metadata.at("budget_reductions").as_array().front().at("section").string_or() == "relevant_memory",
+            "context reduction starts with the declared lowest-priority section");
     }
 }
 

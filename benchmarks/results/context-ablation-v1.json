@@ -1,0 +1,3604 @@
+{
+  "artifact_type": "context-ablation-v1",
+  "captured_at": "2026-08-18T09:54:03.851039+00:00",
+  "configs": [
+    {
+      "avg_managed_prompt_chars": 4711.0,
+      "avg_prompt_compression_ratio": 0.0,
+      "avg_raw_prompt_chars": 4711.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 4,
+      "history_level": "short",
+      "id": "short-low-short",
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "short"
+    },
+    {
+      "avg_managed_prompt_chars": 4783.0,
+      "avg_prompt_compression_ratio": 0.0,
+      "avg_raw_prompt_chars": 4783.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 4,
+      "history_level": "short",
+      "id": "short-low-long",
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "long"
+    },
+    {
+      "avg_managed_prompt_chars": 4909.0,
+      "avg_prompt_compression_ratio": 0.0,
+      "avg_raw_prompt_chars": 4909.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 4,
+      "history_level": "short",
+      "id": "short-high-short",
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "short"
+    },
+    {
+      "avg_managed_prompt_chars": 4981.0,
+      "avg_prompt_compression_ratio": 0.0,
+      "avg_raw_prompt_chars": 4981.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 4,
+      "history_level": "short",
+      "id": "short-high-long",
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "long"
+    },
+    {
+      "avg_managed_prompt_chars": 5631.0,
+      "avg_prompt_compression_ratio": 0.15867324069923802,
+      "avg_raw_prompt_chars": 6693.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 12,
+      "history_level": "medium",
+      "id": "medium-low-short",
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "short"
+    },
+    {
+      "avg_managed_prompt_chars": 5703.0,
+      "avg_prompt_compression_ratio": 0.15698447893569845,
+      "avg_raw_prompt_chars": 6765.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 12,
+      "history_level": "medium",
+      "id": "medium-low-long",
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "long"
+    },
+    {
+      "avg_managed_prompt_chars": 5829.0,
+      "avg_prompt_compression_ratio": 0.15411406181976492,
+      "avg_raw_prompt_chars": 6891.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 12,
+      "history_level": "medium",
+      "id": "medium-high-short",
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "short"
+    },
+    {
+      "avg_managed_prompt_chars": 5901.0,
+      "avg_prompt_compression_ratio": 0.15252046531667385,
+      "avg_raw_prompt_chars": 6963.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 12,
+      "history_level": "medium",
+      "id": "medium-high-long",
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "long"
+    },
+    {
+      "avg_managed_prompt_chars": 6481.0,
+      "avg_prompt_compression_ratio": 0.33012919896640824,
+      "avg_raw_prompt_chars": 9675.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 24,
+      "history_level": "long",
+      "id": "long-low-short",
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "short"
+    },
+    {
+      "avg_managed_prompt_chars": 6553.0,
+      "avg_prompt_compression_ratio": 0.3276905714578845,
+      "avg_raw_prompt_chars": 9747.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 24,
+      "history_level": "long",
+      "id": "long-low-long",
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "long"
+    },
+    {
+      "avg_managed_prompt_chars": 6679.0,
+      "avg_prompt_compression_ratio": 0.323508558695432,
+      "avg_raw_prompt_chars": 9873.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 24,
+      "history_level": "long",
+      "id": "long-high-short",
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "short"
+    },
+    {
+      "avg_managed_prompt_chars": 6751.0,
+      "avg_prompt_compression_ratio": 0.32116641528406237,
+      "avg_raw_prompt_chars": 9945.0,
+      "current_request_preserved_rate": 1.0,
+      "dynamic_reduction_rate": 0.0,
+      "history_count": 24,
+      "history_level": "long",
+      "id": "long-high-long",
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_satisfied_rate": 1.0,
+      "repetitions": 5,
+      "request_level": "long"
+    }
+  ],
+  "matrix": {
+    "config_count": 12,
+    "definition": {
+      "artifact_type": "context-ablation-matrix",
+      "budget": {
+        "reduction_order": [
+          "relevant_memory",
+          "history",
+          "memory",
+          "prefix"
+        ],
+        "section_chars": {
+          "history": 5200,
+          "memory": 1600,
+          "prefix": 3600,
+          "relevant_memory": 1200
+        },
+        "section_floor_policy": "max(20, section_budget / 4)",
+        "total_chars": 12000
+      },
+      "description": "Deterministic 3 x 2 x 2 synthetic long-context matrix for the C++ Runi prompt builder.",
+      "generator": {
+        "history_payload_char": "B",
+        "history_payload_chars": 220,
+        "history_prefix": "matrix-history-",
+        "note_payload_char": "A",
+        "note_payload_chars": 180,
+        "note_prefix": "matrix-note-",
+        "note_tag": "recall"
+      },
+      "history_levels": [
+        {
+          "count": 4,
+          "id": "short"
+        },
+        {
+          "count": 12,
+          "id": "medium"
+        },
+        {
+          "count": 24,
+          "id": "long"
+        }
+      ],
+      "note_levels": [
+        {
+          "count": 2,
+          "id": "low"
+        },
+        {
+          "count": 10,
+          "id": "high"
+        }
+      ],
+      "repetitions": 5,
+      "request_levels": [
+        {
+          "id": "short",
+          "text": "recall"
+        },
+        {
+          "id": "long",
+          "text": "recall the relevant benchmark fact without dropping the latest request details"
+        }
+      ],
+      "schema_version": 1
+    },
+    "repetitions": 5,
+    "sha256": "sha256:6507fc63cac31c0f199cc3bd831210c615ed399235017e27294e0035cbc5a9e2",
+    "source": "benchmarks/context_ablation.json"
+  },
+  "reproducibility": {
+    "compiler": "gcc 15.2.0",
+    "deterministic_inputs": true,
+    "model_calls": 0,
+    "platform": "windows",
+    "section_budgets": {
+      "history": 5200,
+      "memory": 1600,
+      "prefix": 3600,
+      "relevant_memory": 1200
+    },
+    "section_floors": {
+      "history": 1300,
+      "memory": 400,
+      "prefix": 900,
+      "relevant_memory": 300
+    },
+    "timezone": "Asia/Shanghai",
+    "total_budget_chars": 12000,
+    "workspace_strategy": "single immutable workspace snapshot with isolated in-memory session and run stores"
+  },
+  "rows": [
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4711,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4711,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4711,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4711,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4711,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4711,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4711,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4711,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4711,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4711,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4783,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4783,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4783,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4783,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4783,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4783,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4783,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4783,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4783,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4783,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4909,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4909,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4909,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4909,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4909,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4909,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4909,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4909,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4909,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4909,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4981,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4981,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4981,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4981,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4981,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4981,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4981,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4981,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.0,
+      "config_id": "short-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 4,
+      "history_level": "short",
+      "managed_prompt_chars": 4981,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 1001,
+          "rendered_chars": 1001
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 4981,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15867324069923802,
+      "config_id": "medium-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5631,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6693,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15867324069923802,
+      "config_id": "medium-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5631,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6693,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15867324069923802,
+      "config_id": "medium-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5631,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6693,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15867324069923802,
+      "config_id": "medium-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5631,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6693,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15867324069923802,
+      "config_id": "medium-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5631,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6693,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15698447893569845,
+      "config_id": "medium-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5703,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6765,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15698447893569845,
+      "config_id": "medium-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5703,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6765,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15698447893569845,
+      "config_id": "medium-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5703,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6765,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15698447893569845,
+      "config_id": "medium-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5703,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6765,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15698447893569845,
+      "config_id": "medium-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5703,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6765,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15411406181976492,
+      "config_id": "medium-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5829,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6891,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15411406181976492,
+      "config_id": "medium-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5829,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6891,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15411406181976492,
+      "config_id": "medium-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5829,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6891,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15411406181976492,
+      "config_id": "medium-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5829,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6891,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15411406181976492,
+      "config_id": "medium-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5829,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6891,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15252046531667385,
+      "config_id": "medium-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5901,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6963,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15252046531667385,
+      "config_id": "medium-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5901,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6963,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15252046531667385,
+      "config_id": "medium-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5901,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6963,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15252046531667385,
+      "config_id": "medium-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5901,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6963,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.15252046531667385,
+      "config_id": "medium-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 12,
+      "history_level": "medium",
+      "managed_prompt_chars": 5901,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 2983,
+          "rendered_chars": 1921
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 6963,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.33012919896640824,
+      "config_id": "long-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6481,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9675,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.33012919896640824,
+      "config_id": "long-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6481,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9675,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.33012919896640824,
+      "config_id": "long-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6481,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9675,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.33012919896640824,
+      "config_id": "long-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6481,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9675,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.33012919896640824,
+      "config_id": "long-low-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6481,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9675,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.3276905714578845,
+      "config_id": "long-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6553,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9747,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.3276905714578845,
+      "config_id": "long-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6553,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9747,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.3276905714578845,
+      "config_id": "long-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6553,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9747,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.3276905714578845,
+      "config_id": "long-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6553,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9747,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.3276905714578845,
+      "config_id": "long-low-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6553,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 95,
+          "rendered_chars": 95
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 410,
+          "rendered_chars": 410
+        }
+      },
+      "note_count": 2,
+      "note_level": "low",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9747,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.323508558695432,
+      "config_id": "long-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6679,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9873,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.323508558695432,
+      "config_id": "long-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6679,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9873,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.323508558695432,
+      "config_id": "long-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6679,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9873,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.323508558695432,
+      "config_id": "long-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6679,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9873,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.323508558695432,
+      "config_id": "long-high-short",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6679,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 28,
+          "rendered_chars": 28
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9873,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 6,
+      "request_level": "short",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.32116641528406237,
+      "config_id": "long-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6751,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9945,
+      "reduction_order_valid": true,
+      "repetition": 1,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.32116641528406237,
+      "config_id": "long-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6751,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9945,
+      "reduction_order_valid": true,
+      "repetition": 2,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.32116641528406237,
+      "config_id": "long-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6751,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9945,
+      "reduction_order_valid": true,
+      "repetition": 3,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.32116641528406237,
+      "config_id": "long-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6751,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9945,
+      "reduction_order_valid": true,
+      "repetition": 4,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    },
+    {
+      "budget_reduction_count": 0,
+      "budget_reductions": [],
+      "compression_ratio": 0.32116641528406237,
+      "config_id": "long-high-long",
+      "current_request_preserved": true,
+      "dynamic_reduction_triggered": false,
+      "final_section_budgets": {
+        "current_request": null,
+        "history": 5200,
+        "memory": 1600,
+        "prefix": 3600,
+        "relevant_memory": 1200
+      },
+      "history_count": 24,
+      "history_level": "long",
+      "managed_prompt_chars": 6751,
+      "managed_sections": {
+        "current_request": {
+          "budget_chars": null,
+          "raw_chars": 100,
+          "rendered_chars": 100
+        },
+        "history": {
+          "budget_chars": 5200,
+          "raw_chars": 5965,
+          "rendered_chars": 2771
+        },
+        "memory": {
+          "budget_chars": 1600,
+          "raw_chars": 96,
+          "rendered_chars": 96
+        },
+        "prefix": {
+          "budget_chars": 3600,
+          "raw_chars": 3169,
+          "rendered_chars": 3169
+        },
+        "relevant_memory": {
+          "budget_chars": 1200,
+          "raw_chars": 607,
+          "rendered_chars": 607
+        }
+      },
+      "note_count": 10,
+      "note_level": "high",
+      "prompt_budget_chars": 12000,
+      "prompt_budget_satisfied": true,
+      "raw_prompt_chars": 9945,
+      "reduction_order_valid": true,
+      "repetition": 5,
+      "request_chars": 78,
+      "request_level": "long",
+      "section_floors_respected": true
+    }
+  ],
+  "runtime": {
+    "branch": "main",
+    "commit_sha": "7b1c7406eb2c64cdd63f7e726a785eb3dcf671f8",
+    "working_tree_dirty": true
+  },
+  "schema_version": 1,
+  "summary": {
+    "avg_managed_prompt_chars": 5742.666666666667,
+    "avg_prompt_compression_ratio": 0.1603989159312635,
+    "avg_raw_prompt_chars": 7161.333333333333,
+    "comparison_count": 60,
+    "config_count": 12,
+    "configs_with_dynamic_reduction": 0,
+    "contract_passed": true,
+    "current_request_preserved_rate": 1.0,
+    "max_compression_config_id": "long-low-short",
+    "max_prompt_compression_ratio": 0.33012919896640824,
+    "min_prompt_compression_ratio": 0.0,
+    "prompt_budget_satisfied_rate": 1.0,
+    "prompt_build_count": 120,
+    "ratio_of_mean_prompt_chars": 0.1981009123068329,
+    "reduction_order_valid_rate": 1.0,
+    "section_floors_respected_rate": 1.0
+  }
+}

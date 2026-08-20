@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "artifact_type": "context-ablation-matrix",
+  "description": "Deterministic 3 x 2 x 2 synthetic long-context matrix for the C++ Runi prompt builder.",
+  "repetitions": 5,
+  "history_levels": [
+    {"id": "short", "count": 4},
+    {"id": "medium", "count": 12},
+    {"id": "long", "count": 24}
+  ],
+  "note_levels": [
+    {"id": "low", "count": 2},
+    {"id": "high", "count": 10}
+  ],
+  "request_levels": [
+    {"id": "short", "text": "recall"},
+    {"id": "long", "text": "recall the relevant benchmark fact without dropping the latest request details"}
+  ],
+  "generator": {
+    "history_prefix": "matrix-history-",
+    "history_payload_char": "B",
+    "history_payload_chars": 220,
+    "note_prefix": "matrix-note-",
+    "note_payload_char": "A",
+    "note_payload_chars": 180,
+    "note_tag": "recall"
+  },
+  "budget": {
+    "total_chars": 12000,
+    "section_chars": {
+      "prefix": 3600,
+      "memory": 1600,
+      "relevant_memory": 1200,
+      "history": 5200
+    },
+    "section_floor_policy": "max(20, section_budget / 4)",
+    "reduction_order": ["relevant_memory", "history", "memory", "prefix"]
+  }
+}

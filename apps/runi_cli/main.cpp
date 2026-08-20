@@ -14,10 +14,10 @@
 #include <windows.h>
 #endif
 
-#include "runi/config.hpp"
+#include "runi/model/config.hpp"
 #include "runi/core/text.hpp"
-#include "runi/providers.hpp"
-#include "runi/runtime.hpp"
+#include "runi/model/providers.hpp"
+#include "runi/agent/runtime.hpp"
 
 namespace {
 

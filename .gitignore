@@ -6,8 +6,10 @@
 # Runi runtime state
 .runi/
 
-# Local documentation
-/docs/
+# Local documentation; keep the Runi 2.0 architecture contract versioned.
+/docs/*
+!/docs/Runi2.0升级需求与开发计划.md
+!/docs/Runi2.0整体架构与数据链路.md
 
 # CMake and build outputs
 build/
